@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+     
+    <title>{% block title %}{% endblock %}  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 引入 Bootstrap -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon" type="image/x-icon" />
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    
+    {% block head %}{% endblock %}
+    <meta name="baidu-site-verification" content="xUt9qNVlom" />
+    <meta name="google-site-verification" content="h2Kbua4YStdYubtL4-tQRiX0-Mx1ANHbMt8HF8hRj4o" />
+    <meta name="msvalidate.01" content="AE0CD03B6A341E25274B1AA53CBAEE98" />
+    {% if base_front_header_include %}
+        {% for hi in base_front_header_include() %}
+            {% include hi %}
+        {% endfor %}
+    {% endif %}
+    {% if base_front_header_string %}
+        {% for hs in base_front_header_string() %}
+            {{ hs|safe }}
+        {% endfor %}
+    {% endif %}
+</head>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <!--顶部导航-->
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="{{ url_for('.index') }}">EauDouce&nbsp;<i class="icon-home icon-1x"></i></a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href=# title="Write">创作&nbsp;<i class="icon-pencil icon-1x"></i></a></li>
+                        <li><a href=# target="_blank" title="Feed">订阅&nbsp;<i class="icon-rss icon-1x"></i></a></li>
+                        <li class="dropdown">
+                            <a href="#" title="Catalog" class="dropdown-toggle" data-toggle="dropdown">分类目录&nbsp;<i class="icon-folder-open icon-1x"></i></a>
+                            <ul class="dropdown-menu">
+                                 
+                                <li class="divider"></li>
+                                <li><a href=#>原创</a></li>
+                                <li><a href=#>转载</a></li>
+                                <li><a href=#>翻译</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" title="Sitemap" class="dropdown-toggle" data-toggle="dropdown">站点地图&nbsp;<i class="icon-sitemap icon-1x"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href=# target="_blank">站点地图XML版</a></li>
+                                <li><a href=#>站点地图HTML版</a></li>
+                            </ul>
+                        </li>
+                        {% if base_front_navigation_include %}
+                            {% for ni in base_front_navigation_include() %}
+                                {% include ni %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if base_front_navigation_string %}
+                            {% for ns in base_front_navigation_string() %}
+                                {{ ns|safe }}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if g.signin %}
+                        <li class="dropdown">
+                            <a href=# title="User Home" class="dropdown-toggle" data-toggle="dropdown">个人中心&nbsp;<i class="icon-user icon-1x"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href=#>我的主页</a></li>
+                                <li><a href=#>我的文章</a></li>
+                                 
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li><a href=# title="Sign In">登录&nbsp;<i class="icon-signin icon-1x"></i></a></li>
+                        <li><a href=# title="Sign Up">注册&nbsp;<i class="icon-signin icon-1x"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+             
+          
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-8 column">
+            <!-- 路径导航 -->
+            {% block PathNavigation %}{% endblock %}
+            <!-- 搜索 -->
+            
+            {% block container %}{% endblock %}
+        </div>
+        <!-- 右侧 -->
+        {% block aside %}
+        <div class="col-md-4 column">
+            
+            <!-- 推荐文章列表 -->
+            <h4><scan class="icon-book icon-large"></scan> 推荐文章</h4>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <ul class="list-unstyled">
+                     
+                    </ul>
+                </div>
+            </div>
+            <!-- 标签云 -->
+            <h4><scan class="icon-tags icon-1x"> 标签云集</scan></h4>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                     
+                </div>
+            </div>
+           
+        </div>
+        {% endblock %}
+    </div>
+
+</div>
+
+<div id="footer" class="container">
+<nav class="navbar navbar-default text-center">
+    <div class="navbar-inner navbar-content-center">
+        <p class="text-muted credit" style="padding: 10px;">
+            Copyright &copy; 2018.&nbsp;&nbsp;SaintIC, all rights reserved.&nbsp;&nbsp;
+            <scan class="icon-envelope-alt"></scan></scan>&nbsp;<a href="mailto:{{ Email }}">{{ Author }}</a>&nbsp;&nbsp;
+          
+            <br/>
+            <div id="cc-myssl-id">
+                <a href="https://www.upyun.com/?from=saintic" target="_blank" rel="nofollow" upyun=""><img src="https://img.saintic.com/misc/public/upyunlogo.png" height="49px"></a>
+                <a href="https://myssl.com/www.saintic.com?from=mysslid" target="_blank"><img src="https://static.myssl.com/res/images/myssl-id3.png" alt="" style="max-height:49px;margin:0 auto;"></a>
+            </div>
+            {% if base_front_footer_include %}
+                {% for fi in base_front_footer_include() %}
+                    {% include fi %}
+                {% endfor %}
+            {% endif %}
+            {% if base_front_footer_string %}
+                {% for fs in base_front_footer_string() %}
+                    {{ fs|safe }}
+                {% endfor %}
+            {% endif %}
+        </p>
+    </div>
+</nav>
+</div>
+
+<div id="goTopBtn"></div>
+<script src='/static/js/tagscloud.js' type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='layer/layer.js') }}"></script>
+{% block script %}{% endblock %}
+{% if base_front_script_include %}
+    {% for si in base_front_script_include() %}
+        {% include si %}
+    {% endfor %}
+{% endif %}
+{% if base_front_script_string %}
+    {% for ss in base_front_script_string() %}
+        {{ ss|safe }}
+    {% endfor %}
+{% endif %}
+<script type="text/javascript">
+$(document).ready(function(){
+    dropdownOpen();//调用
+});
+
+function dropdownOpen() {
+    /*
+    * 鼠标划过就展开子菜单，免得需要点击才能展开
+    */
+    var $dropdownLi = $('li.dropdown');
+    $dropdownLi.mouseover(function() {
+        $(this).addClass('open');
+    }).mouseout(function() {
+        $(this).removeClass('open');
+    });
+}
+
+function search(){
+    var v = document.getElementById("input").value;
+    console.log(v,!v)
+    if (!v) {
+        return false;
+    } else {
+        var f = document.getElementById("SearchForm");
+        f.action = f.action+"?q=" + v;
+        window.location.href=f.action;
+    }
+}
+
+//返回顶部
+    $(window).scroll(function(){
+      var sc=$(window).scrollTop();
+      var rwidth=$(window).width()
+      if(sc>0){
+        $("#goTopBtn").css("display","block");
+        $("#goTopBtn").css("left",(rwidth-36)+"px");
+      }else{
+        $("#goTopBtn").css("display","none");
+      }
+    })
+    $("#goTopBtn").click(function(){
+      var sc=$(window).scrollTop();
+      $('body,html').animate({scrollTop:0},500);
+    })
+
+</script>  
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends "base/front.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block head %}
+<style type="text/css">
+    /*
+    .carousel{
+     background-color: #000000;
+    }
+    .carousel .item{
+     max-height: 360px;
+     background-color: #000000;
+    }
+    */
+    .carousel img{
+     height: 320px;
+     //width: 100%;
+    }
+</style>
+{% endblock %}
+
+ 
+
+{% block PathNavigation %}
+			<ul class="breadcrumb">
+				<li class="active">
+					当前位置：<a href="{{ url_for('front.index') }}">首页</a>
+				</li>
+			</ul>
+{% endblock %}
+
+ 
+{% block container %}
+            <h3>最新文章</h3>
+            <blockquote>
+           dasdsada
+			</div>
+			 
+			</blockquote>
+{% endblock %}
+
