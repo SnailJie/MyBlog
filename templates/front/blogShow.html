@@ -1,0 +1,123 @@
+{% extends "base/front.html" %}
+
+{% block title %}{{ data['title'] }}{% endblock %}
+
+{% block head %}
+    <style type="text/css">
+        fieldset{padding:.35em .625em .75em;margin:0 2px;border:1px solid #009;border-radius:5px;}
+        legend{padding:.5em;border:0;width:auto}
+        img{max-width: 100%}
+        .funcarea{ padding:.35em .625em .75em;margin:0 2px;border:1px solid #009;border-radius:5px; height: auto; } 
+    </style>
+    {% if blog_show_header_include %}
+        {% for bi in blog_show_header_include() %}
+            {% include bi %}
+        {% endfor %}
+    {% endif %}
+    {% if blog_show_header_string %}
+        {% for bs in blog_show_header_string() %}
+            {{ bs|safe }}
+        {% endfor %}
+    {% endif %}
+    
+{% endblock %}
+
+{% block PathNavigation %}
+			<ul class="breadcrumb">
+				<li>
+					<a href="{{ url_for('front.index') }}">首页</a>
+				</li>
+                <li>
+                    <a href=# title="查看 {{ data.catalog }} 分类中所有文章">{{ data.catalog }}</a>
+                </li>
+				<li class="active">
+					{{ data.title }}
+				</li>
+			</ul>
+{% endblock %}
+
+{% block container %}
+            <!-- 文章详情 -->
+            <article>
+                <header>
+			        <h3 class="text-center text-success">{{ data['title'] }}
+                    {% if data.get("sources") == "原创" %}
+                        <attr title="原创文章"><img src="{{ url_for('static', filename='img/Original.gif') }}"></attr>
+                    {% elif data.get("sources") == "转载" %}
+                        <attr title="转载文章"><img src="{{ url_for('static', filename='img/Reprint.gif') }}"></attr>
+                    {% elif data.get("sources") == "翻译" %}
+                        <attr title="翻译文章"><img src="{{ url_for('static', filename='img/Translate.gif') }}"></attr>
+                    {% endif %}
+                    </h3>
+			    </header>
+                <div class="funcarea">
+                   
+                    <h6>
+                        {#
+                        <i class="icon-user icon-1x"></i><a href=# title="由 {{ data.author }} 发布" style="color: #999">&nbsp;{{ data.author }}</a>&nbsp;
+                        #}
+
+                        {% if data.catalog %}
+                        <i class="icon-folder-open icon-1x"></i><a href=# title="查看 {{ data.catalog }} 分类中所有文章" style="color: #999">&nbsp;{{ data.catalog }}</a>&nbsp;
+                        {% endif %}
+
+                        {% if data.tag %}
+                        <i class="icon-tag icon-1x"></i>
+                        {% for tag in data.tag.split() %}
+                            <a href=# title="查看 {{ tag }} 标签中所有文章" style="color: #999">{{ tag }}</a>&nbsp;
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if data.create_time %}
+                        <i class="icon-calendar icon-1x"></i><scan style="color: #999">&nbsp;{{ data.create_time }}</scan>&nbsp;
+                        {% endif %}
+
+                         
+
+                        {% if blog_show_funcarea_include %}
+                            {% for sfi in blog_show_funcarea_include() %}
+                                {% include sfi %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if blog_show_funcarea_string %}
+                            {% for sfs in blog_show_funcarea_string() %}
+                                {{ sfs|safe }}
+                            {% endfor %}
+                        {% endif %}
+                    </h6>
+                </div>
+                <fieldset>
+                    <legend><small class="text-success text-lowercase">正文区</small></legend>
+				    {{ data['content'] | safe }}
+                </fieldset>
+                {%- if data.get("sources") == "原创" %}
+                <p></p>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <b>版权声明</b>：<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;本文为原创文章，由 Jaren 创作和发表，版权所有，转载请注明作者及出处！<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;本文标题是：{{ data['title'] }}， 本文来源地址：<a href="{{ request.url }}" class="alert-link">{{ request.url }}</a>
+                </div>
+                {% endif -%}
+            </article>
+            <p></p>
+
+            {% if blog_show_content_include %}
+                {% for ci in blog_show_content_include() %}
+                    {% include ci %}
+                {% endfor %}
+            {% endif %}
+
+           
+{% endblock %}
+
+{% block script %}
+{% if blog_show_script_include %}
+    {% for si in blog_show_script_include() %}
+        {% include si %}
+    {% endfor %}
+{% endif %}
+
+<script type="text/javascript">
+
+</script>
+{% endblock %}

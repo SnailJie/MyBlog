@@ -12,8 +12,8 @@
 from rq import Queue
 from redis import from_url
 from torndb import Connection
-from config import REDIS, MYSQL, PLUGINS
-from utils.tool import ParseMySQL, logger
+from config import REDIS, MYSQL
+from utils.tools import ParseMySQL, logger
 
 
 class ServiceBase(object):
@@ -41,10 +41,4 @@ class ServiceBase(object):
         self.asyncQueueLow = Queue(name='low', connection=self.redis)
         self.asyncQueueHigh = Queue(name='high', connection=self.redis)
 
-
-class PluginBase(ServiceBase):
-    """ 插件基类: 提供插件所需要的公共接口与扩展点 """
-    
-    def __init__(self):
-        super(PluginBase, self).__init__()
-        self.logger = logger.plugin
+ 

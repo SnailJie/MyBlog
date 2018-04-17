@@ -46,7 +46,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href=# title="Write">创作&nbsp;<i class="icon-pencil icon-1x"></i></a></li>
+                        <li><a href="{{url_for('front.blogWrite')}}" title="Write">创作&nbsp;<i class="icon-pencil icon-1x"></i></a></li>
                         <li><a href=# target="_blank" title="Feed">订阅&nbsp;<i class="icon-rss icon-1x"></i></a></li>
                         <li class="dropdown">
                             <a href="#" title="Catalog" class="dropdown-toggle" data-toggle="dropdown">分类目录&nbsp;<i class="icon-folder-open icon-1x"></i></a>
@@ -103,8 +103,9 @@
         <div class="col-md-8 column">
             <!-- 路径导航 -->
             {% block PathNavigation %}{% endblock %}
-         
-            {% block container %}{% endblock %}
+         	 <!-- 页面主体 -->
+            {% block container %}
+            {% endblock %}
         </div>
         <!-- 右侧 -->
         {% block aside %}
@@ -141,7 +142,9 @@
 <script src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for('static', filename='layer/layer.js') }}"></script>
+<!-- 每个页面独立的JS -->
 {% block script %}{% endblock %}
+
 {% if base_front_script_include %}
     {% for si in base_front_script_include() %}
         {% include si %}
