@@ -41,7 +41,8 @@
             <!--顶部导航-->
             <nav class="navbar navbar-default" role="navigation">
                 <div class="navbar-header">
-                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="{{ url_for('.index') }}">EauDouce&nbsp;<i class="icon-home icon-1x"></i></a>
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> 
+                     <a class="navbar-brand" href="{{ url_for('.index') }}">MyBlog&nbsp;<i class="icon-home icon-1x"></i></a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
@@ -139,14 +140,9 @@
 <nav class="navbar navbar-default text-center">
     <div class="navbar-inner navbar-content-center">
         <p class="text-muted credit" style="padding: 10px;">
-            Copyright &copy; 2018.&nbsp;&nbsp;SaintIC, all rights reserved.&nbsp;&nbsp;
+            Copyright &copy; 2018.&nbsp;&nbsp;XXXXXX.&nbsp;&nbsp;
             <scan class="icon-envelope-alt"></scan></scan>&nbsp;<a href="mailto:{{ Email }}">{{ Author }}</a>&nbsp;&nbsp;
-          
             <br/>
-            <div id="cc-myssl-id">
-                <a href="https://www.upyun.com/?from=saintic" target="_blank" rel="nofollow" upyun=""><img src="https://img.saintic.com/misc/public/upyunlogo.png" height="49px"></a>
-                <a href="https://myssl.com/www.saintic.com?from=mysslid" target="_blank"><img src="https://static.myssl.com/res/images/myssl-id3.png" alt="" style="max-height:49px;margin:0 auto;"></a>
-            </div>
             {% if base_front_footer_include %}
                 {% for fi in base_front_footer_include() %}
                     {% include fi %}
@@ -195,17 +191,7 @@ function dropdownOpen() {
     });
 }
 
-function search(){
-    var v = document.getElementById("input").value;
-    console.log(v,!v)
-    if (!v) {
-        return false;
-    } else {
-        var f = document.getElementById("SearchForm");
-        f.action = f.action+"?q=" + v;
-        window.location.href=f.action;
-    }
-}
+ 
 
 //返回顶部
     $(window).scroll(function(){
