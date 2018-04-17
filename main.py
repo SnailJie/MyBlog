@@ -16,14 +16,5 @@ app.register_blueprint(front_blueprint)
 def index():
     return redirect(url_for("front.index"))
 
-#暂时还不添加SSO功能
-@app.route('/login/')
-def login():
-    if g.signin:
-        return redirect(url_for("front.index"))
-    else:
-        SSOLoginURL = url_for("sso.Login")
-        return redirect(SSOLoginURL)
-
 if __name__ == '__main__':
     app.run(host=GLOBAL.get('HOST'), port=int(GLOBAL.get('Port')), debug=True)
