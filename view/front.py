@@ -19,3 +19,10 @@ def blogShow(bid):
         return render_template("front/blogShow.html", blogId=bid, data=data, original=True if data.get("sources") == "原创" else False)
     else:
         return abort(404)
+    
+
+@front_blueprint.route("/blog/edit/")
+def blogEdit():
+    blogId = request.args.get("blogId")
+    data = g.api.blog_get_id(blogId).get("data")
+    return render_template("front/blogEdit.html",data = data,blogId = blogId)

@@ -51,7 +51,8 @@
                     </h3>
 			    </header>
                 <div class="funcarea">
-                   
+                    <a href="{{ url_for('front.blogEdit', blogId=blogId) }}" style='color:blue'><button type="button" class="btn btn-warning">编辑文章</button></a>
+                    <a href="javascript:delBlog()" style='color:blue'><button type="button" class="btn btn-danger">删除文章</button></a>
                     <h6>
                         {#
                         <i class="icon-user icon-1x"></i><a href=# title="由 {{ data.author }} 发布" style="color: #999">&nbsp;{{ data.author }}</a>&nbsp;
@@ -71,7 +72,7 @@
                         {% if data.create_time %}
                         <i class="icon-calendar icon-1x"></i><scan style="color: #999">&nbsp;{{ data.create_time }}</scan>&nbsp;
                         {% endif %}
-
+	
                          
 
                         {% if blog_show_funcarea_include %}
@@ -118,6 +119,33 @@
 {% endif %}
 
 <script type="text/javascript">
-
+function delBlog() {
+    layer.confirm('你确定要删除此文章?', {
+        btn: ['确认删除','我再想想']
+    }, function(){
+        console.warn("将要删除节点"+{{ blogId }});
+        $.ajax({
+            url: "{{ url_for('api.blog', blogId=blogId) }}",
+            method: 'DELETE',
+            async: false,
+            datatype: 'json',
+            success: function(res) {
+                console.log(res);
+                if (res.success==true) {
+                    layer.msg("删除文章成功！", {icon: 1, time: 3*1000});
+                    window.location.href="{{ url_for('front.index') }}";
+                } else {
+                    layer.msg("删除文章失败！"+res.msg, {icon: 2, time: 15*1000});
+                }
+            },
+            error: function(error){
+                console.log(error);
+                layer.alert(res.statusText);
+            }
+        });
+    }, function() {
+        console.log("canel delete blog");
+    });
+}
 </script>
 {% endblock %}

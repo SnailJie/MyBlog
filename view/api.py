@@ -112,29 +112,23 @@ class Blog(Resource):
 
     def put(self):
         """ 更新博客文章接口 """
-        if g.username == request.form.get("author") or g.username in g.api.user_get_admins().get("data"):#可能伪造author
-            data = dict(
-                title   = request.form.get('title'),
-                content = request.form.get('content'),
-                tag     = request.form.get("tag"),
-                catalog = request.form.get("catalog", "未分类"),
-                sources = request.form.get("sources", "原创"),
-                author  = request.form.get("author", "admin"),
-                blogId  = request.form.get("blogId")
-            )
-            logger.sys.debug(data)
-            return g.api.blog_update(**data)
-        else:
-            return {"code": 403, "msg": "Permission denied"}, 403
-
+        data = dict(
+            title   = request.form.get('title'),
+            content = request.form.get('content'),
+            tag     = request.form.get("tag"),
+            catalog = request.form.get("catalog", "未分类"),
+            sources = request.form.get("sources", "原创"),
+            author  = request.form.get("author", "admin"),
+            blogId  = request.form.get("blogId")
+        )
+        logger.sys.debug(data)
+        return g.api.blog_update(**data)
+        
     def delete(self):
         """ 删除博客文章接口 """
-
         blogId = request.args.get("blogId")
-        if g.username in g.api.user_get_admins().get("data"):
-            return g.api.blog_delete(blogId)
-        else:
-            return abort(403)
+        return g.api.blog_delete(blogId)
+       
  
 
 api_blueprint = Blueprint("api", __name__)
